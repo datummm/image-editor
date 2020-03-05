@@ -52,8 +52,19 @@ rotateRight.addEventListener('click', function () {
 });
 
 saveButton.addEventListener('click', function () {
-  return new Promise (function (resolve, reject) {
-    canvas.toBlob(resolve, 'image/jpeg', 0.9)
+  var format = 'jpg';
+  new Promise(function (resolve, reject) {
+    if (format === 'jpg') {
+      canvas.toBlob(resolve, 'image/jpeg', 0.9);
+    } else {
+      canvas.toBlob(resolve, 'image/png');
+    }
+  }).then(function (blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = blob.name = 'file.' + format;
+    a.click();
   });
 });
 
