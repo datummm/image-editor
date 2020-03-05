@@ -1,1 +1,1 @@
-# image-editor
+Quick project to edit images
